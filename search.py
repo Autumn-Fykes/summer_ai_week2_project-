@@ -85,13 +85,48 @@ def depthFirstSearch(problem: SearchProblem):
     print("Start:", problem.getStartState())
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+  
+    from util import Stack
+    visited = []
+    my_stack = util.Stack()
+    goal_found = False
+    tuple = ("X", "Y", "Z")
+    problem.getSuccessors = tuple
+
+    while not goal_found:
+        node = my_stack.pop()
+
+        if(problem.isGoalState(node)):
+            goal_found = True
+        else:
+            visited.append(node)
+            for child in problem.getSuccessors(node):
+                if(child not in visited or child not in my_stack):
+                    my_stack.push(child)
+    return
+
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Queue
+
+    visited = []
+    my_queue = util.Queue()
+    goal_found = False
+    tuple = ("X", "Y", "Z")
+    problem.getSuccessors = tuple
+
+    while not goal_found:
+        node = my_queue.pop()
+
+        if(problem.isGoalState(node)):
+            goal_found = True
+        else:
+            visited.append(node)
+            for child in problem.getSuccessors(node):
+             if(child not in visited or child not in my_queue):
+                my_queue.push(child)
+    return
 
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
@@ -112,6 +147,18 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
 
 
 # Abbreviations
+bfs = breadthFirstSearch
+dfs = depthFirstSearch
+astar = aStarSearch
+ucs = uniformCostSearch
+
+
+from util import Stack
+
+visited = []
+my_stack = util.Stack()
+goal_found = False
+    
 bfs = breadthFirstSearch
 dfs = depthFirstSearch
 astar = aStarSearch
